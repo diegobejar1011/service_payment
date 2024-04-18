@@ -6,7 +6,7 @@ import { SocketioRepository } from "../../shared/socket/infraestructure/ports/so
 import { SendDataService } from "../../shared/socket/application/sendDataService";
 
 const amqplib = new AmqpRepository("amqp://18.209.192.241/");
-const socketio = new SocketioRepository("http://3.215.212.83:5000/");
+const socketio = new SocketioRepository("http://52.201.131.189:5000/");
 
 const sendMessageService = new SendMessageService(amqplib);
 const sendDataService = new SendDataService(socketio);
