@@ -16,7 +16,7 @@ export class CreatePaymentService {
                price: order.price,
                total: total
             };
-
+            console.log(payment);
             await this.sendMessageService.execute(payment, QueueName.BACKUP);
             await this.sendDataService.execute(Events.SEND_DATA, payment);
             return payment;
