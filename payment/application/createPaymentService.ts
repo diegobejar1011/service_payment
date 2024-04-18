@@ -8,8 +8,9 @@ export class CreatePaymentService {
     constructor(private readonly sendMessageService : SendMessageService, private readonly sendDataService : SendDataService) {}
     async execute(order: any) : Promise<Payment> {
         try {
-
+            console.log('Inicio del servicio');
             const total = order.price * order.amount;
+            console.log('Total: ' + total);
             const payment = {
                product: order.product,
                amount: order.amount,
