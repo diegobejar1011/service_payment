@@ -1,3 +1,3 @@
 export class Payment {
-    constructor(readonly id: number, readonly id_order: number, readonly title: string ){}
+    constructor( readonly product: string, readonly amount: number, readonly price: number, readonly total: number) {}
 }

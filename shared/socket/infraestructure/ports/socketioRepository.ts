@@ -17,10 +17,19 @@ export class SocketioRepository implements SocketRepository {
         })
     }
 
-    async sendData(eventEmit: Events, data: Payment): Promise<void> {
-        
+    async sendData(eventEmit: Events, payment: Payment): Promise<void> {
+        return new Promise<void> ( async (resolve, reject) => {
+            try {
+                const socket = await this.connect();
+                socket.on('connect', () => {
+                    console.log(socket.id);
+                })
+                socket.emit(eventEmit, payment);
+                resolve();
+            } catch (error: any ) {
+                reject(error);
+            }
+        })
     }
-
-    
 
 }
