@@ -2,10 +2,11 @@ import { SendMessageService } from "../../shared/broker/application/services/sen
 import { QueueName } from "../../shared/broker/domain/entities";
 import { SendDataService } from "../../shared/socket/application/sendDataService";
 import { Events } from "../../shared/socket/domain/entities/events";
+import { Payment } from "../domain/entities/payment";
 
 export class CreatePaymentService {
     constructor(private readonly sendMessageService : SendMessageService, private readonly sendDataService : SendDataService) {}
-    async execute(order: any) : Promise<void> {
+    async execute(order: any) : Promise<Payment> {
         try {
 
             const total = order.price * order.amount;
@@ -18,6 +19,7 @@ export class CreatePaymentService {
 
             await this.sendMessageService.execute(payment, QueueName.BACKUP);
             await this.sendDataService.execute(Events.SEND_DATA, payment);
+            return payment;
         } catch (error: any) {
             throw new Error(error);
         }
